@@ -4,13 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ff2d259-e08b-4e01-a18c-6a4e1cd3e747" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/ui_app.py" afterDir="false" />
+    <list default="true" id="9ff2d259-e08b-4e01-a18c-6a4e1cd3e747" name="更改" comment="2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/rules.json" beforeDir="false" afterPath="$PROJECT_DIR$/config/rules.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/rule_engine.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/rule_engine.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sender/smtp_client.py" beforeDir="false" afterPath="$PROJECT_DIR$/sender/smtp_client.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui_app.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui_app.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,7 +57,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "master",
     "last_opened_file_path": "D:/SOFEWARE/jetbrains/PyCharm Community/MailManager/ui_app.py",
-    "settings.editor.selected.configurable": "vcs.Git"
+    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable"
   },
   "keyToStringList": {
     "ChangesTree.GroupingKeys": [
@@ -109,6 +106,19 @@
       <option name="presentableId" value="Default" />
       <updated>1775999352440</updated>
     </task>
+    <task id="LOCAL-00001" summary="2">
+      <option name="closed" value="true" />
+      <created>1776074830085</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1776074830085</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="2" />
+    <option name="LAST_COMMIT_MESSAGE" value="2" />
   </component>
 </project>

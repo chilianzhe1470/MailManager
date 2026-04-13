@@ -19,7 +19,7 @@ def send_single():
     subject = subject_entry.get()
     body = body_text.get("1.0", tk.END)
 
-    success = send_mail(
+    success ,msg = send_mail(
         to_email=to_email,
         subject=subject,
         body=body,

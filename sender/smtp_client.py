@@ -10,7 +10,8 @@ from email import encoders
 logging.basicConfig(
     filename="logs/mail.log",
     level=logging.INFO,
-    format="%(asctime)s - %(levelname)s - %(message)s"
+    format="%(asctime)s | %(levelname)s | %(message)s",
+    encoding="utf-8"
 )
 
 def send_mail(to_email, subject, body, attachments=None,
@@ -39,18 +40,39 @@ def send_mail(to_email, subject, body, attachments=None,
                 )
 
                 msg.attach(part)
+            else:
+                logging.warning(f"附件不存在: {path}")
 
     try:
-        server = smtplib.SMTP("smtp.qq.com", 587)
-        server.starttls()
+        server = smtplib.SMTP_SSL("smtp.qq.com", 465, timeout=15)
+        server.ehlo()
         server.login(from_email, auth_code)
 
         server.sendmail(from_email, to_email, msg.as_string())
         server.quit()
 
-        logging.info(f"发送成功: {to_email}")
-        return True
+        return True, "发送成功"
 
     except Exception as e:
-        logging.error(f"发送失败: {to_email}, 错误: {e}")
-        return False
+        return False, str(e)
+
+    # ⭐ 关键异常分类（商业级）
+    except smtplib.SMTPAuthenticationError:
+        logging.error("认证失败（授权码错误）")
+        return False, "认证失败：请检查邮箱或授权码"
+
+    except smtplib.SMTPConnectError:
+        logging.error("连接服务器失败")
+        return False, "连接服务器失败"
+
+    except smtplib.SMTPRecipientsRefused:
+        logging.error("收件人地址错误")
+        return False, "收件人地址无效"
+
+    except smtplib.SMTPException as e:
+        logging.error(f"SMTP错误: {e}")
+        return False, f"邮件发送失败: {e}"
+
+    except Exception as e:
+        logging.error(f"未知错误: {e}")
+        return False, f"未知错误: {e}"
