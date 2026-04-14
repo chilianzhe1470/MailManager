@@ -53,11 +53,28 @@ def send_single():
 def send_batch():
     email = email_entry.get().strip()
     auth = auth_entry.get().strip()
+    subject = subject_entry.get().strip()
+    body = body_text.get("1.0", tk.END).strip()
+    batch_lines = batch_to_text.get("1.0", tk.END).splitlines()
+    batch_recipients = [line.strip() for line in batch_lines if line.strip()]
 
     if not validate_basic_fields(email, auth):
         return
 
-    results = process_rules(email, auth)
+    if batch_recipients:
+        results = []
+        for to_email in batch_recipients:
+            ok, message = send_mail(
+                to_email=to_email,
+                subject=subject,
+                body=body,
+                attachments=attachments,
+                from_email=email,
+                auth_code=auth
+            )
+            results.append((to_email, ok, message))
+    else:
+        results = process_rules(email, auth)
 
     msg = ""
     for r in results:
@@ -77,9 +94,13 @@ tk.Label(root, text="授权码").pack()
 auth_entry = tk.Entry(root, width=40)
 auth_entry.pack()
 
-tk.Label(root, text="收件人").pack()
+tk.Label(root, text="单个收件人").pack()
 to_entry = tk.Entry(root, width=40)
 to_entry.pack()
+
+tk.Label(root, text="批量收件人（每行一个）").pack()
+batch_to_text = tk.Text(root, height=6)
+batch_to_text.pack()
 
 tk.Label(root, text="主题").pack()
 subject_entry = tk.Entry(root, width=40)

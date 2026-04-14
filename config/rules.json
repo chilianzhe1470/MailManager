@@ -1,8 +1,24 @@
 [
   {
-    "email": "2032009168@qq.com",
-    "subject": "测试邮件",
-    "body": "这是自动发送测试",
+    "email": "friend_a@example.com",
+    "subject": "第一封批量邮件",
+    "body": "你好，这是系统批量发送的第1封邮件。",
     "attachments": []
+  },
+  {
+    "email": "friend_b@example.com",
+    "subject": "第二封批量邮件",
+    "body": "你好，这是系统批量发送的第2封邮件。",
+    "attachments": [
+      "attachments/a.pdf"
+    ]
+  },
+  {
+    "email": "friend_c@example.com",
+    "subject": "第三封批量邮件",
+    "body": "你好，这是系统批量发送的第3封邮件。",
+    "attachments": [
+      "attachments/b.pdf"
+    ]
   }
 ]

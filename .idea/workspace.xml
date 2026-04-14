@@ -6,10 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="9ff2d259-e08b-4e01-a18c-6a4e1cd3e747" name="更改" comment="3">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/rule_engine.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/rule_engine.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/rules.json" beforeDir="false" afterPath="$PROJECT_DIR$/config/rules.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logs/mail.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/mail.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sender/smtp_client.py" beforeDir="false" afterPath="$PROJECT_DIR$/sender/smtp_client.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui_app.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui_app.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -133,7 +131,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776075936672</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="3">
+      <option name="closed" value="true" />
+      <created>1776179887751</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1776179887751</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
