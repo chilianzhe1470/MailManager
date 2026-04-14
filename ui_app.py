@@ -6,6 +6,17 @@ from core.rule_engine import process_rules
 
 attachments = []
 
+
+def validate_basic_fields(email, auth):
+    if not email.strip():
+        messagebox.showerror("失败", "发件人邮箱不能为空")
+        return False
+    if not auth.strip():
+        messagebox.showerror("失败", "授权码不能为空")
+        return False
+    return True
+
+
 def select_file():
     file_path = filedialog.askopenfilename()
     if file_path:
@@ -13,13 +24,19 @@ def select_file():
         attachment_label.config(text="\n".join(attachments))
 
 def send_single():
-    email = email_entry.get()
-    auth = auth_entry.get()
-    to_email = to_entry.get()
-    subject = subject_entry.get()
-    body = body_text.get("1.0", tk.END)
+    email = email_entry.get().strip()
+    auth = auth_entry.get().strip()
+    to_email = to_entry.get().strip()
+    subject = subject_entry.get().strip()
+    body = body_text.get("1.0", tk.END).strip()
 
-    success ,msg = send_mail(
+    if not validate_basic_fields(email, auth):
+        return
+    if not to_email:
+        messagebox.showerror("失败", "收件人不能为空")
+        return
+
+    success, msg = send_mail(
         to_email=to_email,
         subject=subject,
         body=body,
@@ -29,19 +46,22 @@ def send_single():
     )
 
     if success:
-        messagebox.showinfo("成功", "邮件发送成功")
+        messagebox.showinfo("成功", f"邮件发送成功\n{msg}")
     else:
-        messagebox.showerror("失败", "邮件发送失败")
+        messagebox.showerror("失败", f"邮件发送失败\n{msg}")
 
 def send_batch():
-    email = email_entry.get()
-    auth = auth_entry.get()
+    email = email_entry.get().strip()
+    auth = auth_entry.get().strip()
+
+    if not validate_basic_fields(email, auth):
+        return
 
     results = process_rules(email, auth)
 
     msg = ""
     for r in results:
-        msg += f"{r[0]} -> {'成功' if r[1] else '失败'}\n"
+        msg += f"{r[0]} -> {'成功' if r[1] else '失败'} | {r[2]}\n"
 
     messagebox.showinfo("批量发送结果", msg)
 

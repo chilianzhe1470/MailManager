@@ -11,7 +11,7 @@ def process_rules(from_email, auth_code):
     results = []
 
     for rule in rules:
-        success = send_mail(
+        ok, message = send_mail(
             to_email=rule["email"],
             subject=rule["subject"],
             body=rule["body"],
@@ -20,6 +20,6 @@ def process_rules(from_email, auth_code):
             auth_code=auth_code
         )
 
-        results.append((rule["email"], success))
+        results.append((rule["email"], ok, message))
 
     return results
