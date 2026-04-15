@@ -6,6 +6,7 @@ import re
 from datetime import datetime
 import logging
 import os
+import sys
 
 
 IMAP_CONFIG = {
@@ -18,7 +19,18 @@ IMAP_CONFIG = {
     "live.com": ("outlook.office365.com", 993),
 }
 
-os.makedirs("logs", exist_ok=True)
+def get_app_data_dir():
+    """获取应用程序数据目录（用于保存日志）"""
+    if hasattr(sys, '_MEIPASS'):
+        app_data = os.path.join(os.environ.get('USERPROFILE', ''), 'MailManager')
+    else:
+        app_data = os.path.abspath("logs")
+    
+    os.makedirs(app_data, exist_ok=True)
+    return app_data
+
+log_dir = get_app_data_dir()
+os.makedirs(log_dir, exist_ok=True)
 logger = logging.getLogger(__name__)
 
 

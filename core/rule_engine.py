@@ -1,8 +1,19 @@
 import json
+import sys
+import os
 from sender.smtp_client import send_mail
 
+def get_resource_path(relative_path):
+    """获取资源文件的绝对路径（支持打包后的exe）"""
+    if hasattr(sys, '_MEIPASS'):
+        base_path = sys._MEIPASS
+    else:
+        base_path = os.path.abspath(".")
+    return os.path.join(base_path, relative_path)
+
 def load_rules(path="config/rules.json"):
-    with open(path, "r", encoding="utf-8") as f:
+    full_path = get_resource_path(path)
+    with open(full_path, "r", encoding="utf-8") as f:
         return json.load(f)
 
 def process_rules(from_email, auth_code):

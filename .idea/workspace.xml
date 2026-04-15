@@ -5,7 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9ff2d259-e08b-4e01-a18c-6a4e1cd3e747" name="更改" comment="3">
+      <change afterPath="$PROJECT_DIR$/build_exe.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/rule_engine.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/rule_engine.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/receiver/imap_client.py" beforeDir="false" afterPath="$PROJECT_DIR$/receiver/imap_client.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sender/smtp_client.py" beforeDir="false" afterPath="$PROJECT_DIR$/sender/smtp_client.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -168,7 +172,23 @@
       <option name="project" value="LOCAL" />
       <updated>1776257224389</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="3">
+      <option name="closed" value="true" />
+      <created>1776258227403</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1776258227403</updated>
+    </task>
+    <task id="LOCAL-00010" summary="3">
+      <option name="closed" value="true" />
+      <created>1776258258682</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1776258258682</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

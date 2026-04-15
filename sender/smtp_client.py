@@ -1,5 +1,6 @@
 import smtplib
 import os
+import sys
 import logging
 
 from email.mime.text import MIMEText
@@ -7,10 +8,20 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.application import MIMEApplication
 from email.header import Header
 
-os.makedirs("logs", exist_ok=True)
+def get_app_data_dir():
+    """获取应用程序数据目录（用于保存日志）"""
+    if hasattr(sys, '_MEIPASS'):
+        app_data = os.path.join(os.environ.get('USERPROFILE', ''), 'MailManager')
+    else:
+        app_data = os.path.abspath("logs")
+    
+    os.makedirs(app_data, exist_ok=True)
+    return app_data
+
+log_dir = get_app_data_dir()
 
 logging.basicConfig(
-    filename="logs/mail.log",
+    filename=os.path.join(log_dir, "mail.log"),
     level=logging.INFO,
     format="%(asctime)s | %(levelname)s | %(message)s",
     encoding="utf-8"
@@ -21,9 +32,9 @@ SMTP_CONFIG = {
     "gmail.com": ("smtp.gmail.com", 465),
     "163.com": ("smtp.163.com", 465),
     "126.com": ("smtp.126.com", 465),
-    "outlook.com": ("smtp-mail.outlook.com", 465),
-    "hotmail.com": ("smtp-mail.outlook.com", 465),
-    "live.com": ("smtp-mail.outlook.com", 465),
+    "outlook.com": ("smtp-mail.outlook.com", 587),
+    "hotmail.com": ("smtp-mail.outlook.com", 587),
+    "live.com": ("smtp-mail.outlook.com", 587),
 }
 
 
@@ -85,10 +96,18 @@ def send_mail(to_email, subject, body, attachments=None,
                 logging.warning(f"附件不存在: {path}")
 
     try:
-        with smtplib.SMTP_SSL(host, port, timeout=15) as server:
-            server.ehlo()
-            server.login(from_email, auth_code)
-            server.sendmail(from_email, to_email, msg.as_string())
+        if "outlook" in host.lower() or "hotmail" in host.lower() or "live" in host.lower():
+            with smtplib.SMTP(host, port, timeout=15) as server:
+                server.ehlo()
+                server.starttls()
+                server.ehlo()
+                server.login(from_email, auth_code)
+                server.sendmail(from_email, to_email, msg.as_string())
+        else:
+            with smtplib.SMTP_SSL(host, port, timeout=15) as server:
+                server.ehlo()
+                server.login(from_email, auth_code)
+                server.sendmail(from_email, to_email, msg.as_string())
         return True, "发送成功"
 
     except smtplib.SMTPAuthenticationError:
