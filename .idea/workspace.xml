@@ -5,11 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9ff2d259-e08b-4e01-a18c-6a4e1cd3e747" name="更改" comment="3">
-      <change afterPath="$PROJECT_DIR$/build_exe.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/rule_engine.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/rule_engine.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/receiver/imap_client.py" beforeDir="false" afterPath="$PROJECT_DIR$/receiver/imap_client.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sender/smtp_client.py" beforeDir="false" afterPath="$PROJECT_DIR$/sender/smtp_client.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MailManager.spec" beforeDir="false" afterPath="$PROJECT_DIR$/MailManager.spec" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/MailManager/Analysis-00.toc" beforeDir="false" afterPath="$PROJECT_DIR$/build/MailManager/Analysis-00.toc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/MailManager/EXE-00.toc" beforeDir="false" afterPath="$PROJECT_DIR$/build/MailManager/EXE-00.toc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/MailManager/MailManager.pkg" beforeDir="false" afterPath="$PROJECT_DIR$/build/MailManager/MailManager.pkg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/MailManager/PKG-00.toc" beforeDir="false" afterPath="$PROJECT_DIR$/build/MailManager/PKG-00.toc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/MailManager/base_library.zip" beforeDir="false" afterPath="$PROJECT_DIR$/build/MailManager/base_library.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/MailManager.exe" beforeDir="false" afterPath="$PROJECT_DIR$/dist/MailManager.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/logs/mail.log" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -188,7 +192,15 @@
       <option name="project" value="LOCAL" />
       <updated>1776258258682</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="3">
+      <option name="closed" value="true" />
+      <created>1776259480252</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1776259480252</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
