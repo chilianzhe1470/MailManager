@@ -4,8 +4,8 @@ import logging
 
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-from email.mime.base import MIMEBase
-from email import encoders
+from email.mime.application import MIMEApplication
+from email.header import Header
 
 os.makedirs("logs", exist_ok=True)
 
@@ -56,7 +56,7 @@ def send_mail(to_email, subject, body, attachments=None,
     msg = MIMEMultipart()
     msg['From'] = from_email
     msg['To'] = to_email
-    msg['Subject'] = subject
+    msg['Subject'] = str(Header(subject or "", "utf-8"))
 
     msg.attach(MIMEText(body, "plain", "utf-8"))
 
@@ -64,17 +64,22 @@ def send_mail(to_email, subject, body, attachments=None,
         for path in attachments:
             if os.path.exists(path):
                 with open(path, "rb") as f:
-                    part = MIMEBase('application', 'octet-stream')
-                    part.set_payload(f.read())
-
-                encoders.encode_base64(part)
+                    file_bytes = f.read()
                 filename = os.path.basename(path)
-
+                filename_header = str(Header(filename, "utf-8"))
+                part = MIMEApplication(file_bytes, _subtype="octet-stream")
                 part.add_header(
-                    'Content-Disposition',
-                    f'attachment; filename="{filename}"'
+                    "Content-Disposition",
+                    "attachment",
+                    filename=("utf-8", "", filename)
                 )
-
+                part.add_header(
+                    "Content-Type",
+                    "application/octet-stream",
+                    name=("utf-8", "", filename)
+                )
+                part.add_header("X-Attachment-Name", filename_header)
+                logging.info("准备发送附件 path=%s filename=%s bytes=%s", path, filename, len(file_bytes))
                 msg.attach(part)
             else:
                 logging.warning(f"附件不存在: {path}")

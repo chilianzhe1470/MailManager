@@ -1,10 +1,13 @@
 import tkinter as tk
 from tkinter import filedialog, messagebox
 import os
+import logging
 
 from sender.smtp_client import send_mail
 from core.rule_engine import process_rules
 from receiver.imap_client import fetch_inbox
+
+logger = logging.getLogger(__name__)
 
 attachments = []
 inbox_mails = []
@@ -175,21 +178,41 @@ def download_selected_attachments():
         return
 
     saved_count = 0
+    failed_items = []
     for item in items:
-        filename = item["filename"]
-        content = item["content"]
+        filename = item.get("filename", "attachment.bin")
+        content = item.get("content", b"")
         target_path = os.path.join(save_dir, filename)
 
-        if os.path.exists(target_path):
-            name, ext = os.path.splitext(filename)
-            seq = 1
-            while os.path.exists(target_path):
-                target_path = os.path.join(save_dir, f"{name}_{seq}{ext}")
-                seq += 1
+        try:
+            if not isinstance(content, (bytes, bytearray)):
+                logger.warning("附件内容类型异常 filename=%s type=%s", filename, type(content).__name__)
+                content = str(content).encode("utf-8", errors="replace")
 
-        with open(target_path, "wb") as f:
-            f.write(content)
-        saved_count += 1
+            if os.path.exists(target_path):
+                name, ext = os.path.splitext(filename)
+                seq = 1
+                while os.path.exists(target_path):
+                    target_path = os.path.join(save_dir, f"{name}_{seq}{ext}")
+                    seq += 1
+
+            with open(target_path, "wb") as f:
+                f.write(content)
+            saved_count += 1
+            logger.info("附件保存成功 filename=%s path=%s bytes=%s", filename, target_path, len(content))
+        except Exception as e:
+            failed_items.append((filename, str(e)))
+            logger.exception("附件保存失败 filename=%s path=%s error=%s", filename, target_path, e)
+
+    if failed_items:
+        failed_preview = "\n".join([f"- {name}: {err}" for name, err in failed_items[:5]])
+        messagebox.showwarning(
+            "下载完成（部分失败）",
+            f"成功下载 {saved_count} 个，失败 {len(failed_items)} 个。\n"
+            f"失败详情（最多展示5条）：\n{failed_preview}\n\n"
+            f"请查看日志: logs/mail.log",
+        )
+        return
 
     messagebox.showinfo("下载完成", f"已下载 {saved_count} 个附件到：\n{save_dir}")
 
@@ -206,12 +229,29 @@ def show_page(page_name):
         receive_frame.pack(fill="both", expand=True, padx=20, pady=20)
 
 
+def _clear_log_file():
+    log_path = os.path.join("logs", "mail.log")
+    try:
+        os.makedirs("logs", exist_ok=True)
+        with open(log_path, "w", encoding="utf-8"):
+            pass
+    except Exception as e:
+        print(f"清理日志失败: {e}")
+
+
+def on_app_close():
+    logging.shutdown()
+    _clear_log_file()
+    root.destroy()
+
+
 root = tk.Tk()
-root.title("邮件管理系统")
+root.title("MailManager")
 root.geometry("950x760")
+root.protocol("WM_DELETE_WINDOW", on_app_close)
 
 main_frame = tk.Frame(root)
-tk.Label(main_frame, text="邮件管理系统", font=("Microsoft YaHei", 18, "bold")).pack(pady=30)
+tk.Label(main_frame, text="MailManager", font=("Microsoft YaHei", 18, "bold")).pack(pady=30)
 tk.Button(
     main_frame,
     text="进入发件功能",
