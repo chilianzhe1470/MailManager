@@ -26,26 +26,6 @@
 - **实时反馈**：操作结果即时提示
 - **日志记录**：详细记录所有操作日志
 
-## 项目结构
-
-```
-
-MailManager/
-├── core/                  # 核心模块
-│   └── rule_engine.py    # 规则引擎，处理批量发送规则
-├── receiver/              # 收件模块
-│   └── imap_client.py    # IMAP 客户端，实现邮件接收
-├── sender/                # 发件模块
-│   └── smtp_client.py    # SMTP 客户端，实现邮件发送
-├── config/                # 配置文件
-│   └── rules.json        # 批量发送规则配置
-├── attachments/           # 附件存储目录
-├── logs/                  # 日志目录
-│   └── mail.log          # 运行日志
-├── main.py               # 命令行测试入口
-├── ui_app.py             # 图形界面应用入口
-└── README.md             # 项目说明文档
-```
 ## 环境要求
 
 - Python 3.6+
